@@ -1,15 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raktárkezelő rendszer - Készlet</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <title>Tihanyi-Tb Kft.</title>
 </head>
 <body>
-<!-- Remove the outer <form> tag -->
 <nav class="navbar navbar-dark bg-primary" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <a class="navbar-brand" href="dashboard.php">Tihanyi-Tb Kft.</a>
@@ -19,7 +17,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="dashboard.php">Főoldal</a>
+          <a class="nav-link active" aria-current="page" href="dashboard.php">Home</a>
         </li>
         <li class="nav-item">
           
@@ -30,7 +28,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Elérhetőség</a></li>
-            <li><a class="dropdown-item" href="raktar.php">Raktár</a></li>
+            <li><a class="dropdown-item" href="#">Raktár</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Megrendelés</a></li>
           </ul>
@@ -39,7 +37,7 @@
           
         </li>
       </ul>
-      <ul class="navbar-nav me-0 mb-2 mb-lg-0"> 
+      <ul class="navbar-nav me-0 mb-2 mb-lg-0"> <!-- Fix the typo in the class attribute -->
         <li class="nav-item" >
           <form method="POST" action="">
             <input type="submit" name="logout" value="Kijelentkezés">
@@ -70,6 +68,41 @@ if (isset($_POST['logout'])) {
 }
 ?>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<div class="container my-5">
+    <h1>Készlet</h1>
+    <?php
+        // Query the database to get the list of products and their quantities
+        $sql = "SELECT * FROM inventory ";
+        $result = mysqli_query($conn, $sql);
+
+        // Check if there are any products
+        if (mysqli_num_rows($result) > 0) {
+            echo '<table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Termék neve</th>
+                            <th scope="col">Mennyiség</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+
+            // Loop through each row in the result set
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '<tr>
+                        <td>' . $row['product_name'] . '</td>
+                        <td>' . $row['quantity'] . '</td>
+                     </tr>';
+            }
+
+            echo '</tbody></table>';
+        } else {
+            echo '<p class="lead">Nincsenek termékek a készleten.</p>';
+        }
+
+        // Close the database connection
+        mysqli_close($conn);
+    ?>
+</div>
+
 </body>
 </html>
