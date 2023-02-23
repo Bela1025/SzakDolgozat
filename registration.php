@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h2>Regisztráció</h2>
-	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<label for="username">Felhasználónév:</label>
 		<input type="text" id="username" name="username"><br><br>
 		<label for="password">Jelszó:</label>
@@ -15,7 +15,7 @@
 		<input type="password" id="confirm_password" name="confirm_password"><br><br>
 		<label for="email">Email:</label>
 		<input type="email" id="email" name="email"><br><br>
-		<input type="submit" value="Regisztrálás" href="index.php">
+		<input type="submit" value="Regisztrálás" >
 	</form>
 
 	<?php
@@ -24,14 +24,15 @@
 		
 		$username = $_POST["username"];
 		$password = $_POST["password"];
+		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 		$confirm_password = $_POST["confirm_password"];
 		$email = $_POST["email"];
-
+		
 		
 		if (empty($username) || empty($password) || empty($confirm_password) || empty($email)) {
-			echo "<p>Please fill out all fields.</p>";
+			echo "<p>Kérem töltse ki az összes mezőt!</p>";
 		} elseif ($password != $confirm_password) {
-			echo "<p>Passwords do not match.</p>";
+			echo "<p>Jelszók nem egyeznek!</p>";
 		} else {
 			
 			$host = "localhost";
@@ -39,12 +40,12 @@
 			$db_password = "jF/rfVlPIJHSjGPc";
 			$db_name = "szakdoga";
 			$conn = mysqli_connect($host, $db_username, $db_password, $db_name);
-
+			header('Location: login.php');
 			
 			if (!$conn) {
 				die("Connection failed: " . mysqli_connect_error());
 			}
-
+			
 			// Prepare the SQL statement to insert the user data into the database
 			$sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email')";
 

@@ -36,6 +36,8 @@ if (isset($_POST['submit'])) {
 
     // Set error message if login is unsuccessful
     $error_message = 'Invalid username or password';
+    print_r ($_POST);
+    print_r ($_SESSION);
 }
 
 ?>
