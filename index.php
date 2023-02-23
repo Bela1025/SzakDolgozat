@@ -41,10 +41,11 @@
       <ul calss="navbar-nav me-0 mb-2 mb-lg-0">
       <li class="nav-item">
         <a class="nav-link"  href="registration.php">Regisztráció</a> 
+
     </li>
     <li class="nav-item">
     <a class="nav-link"  href="login.php">Bejelentkezés</a>   
-  </li>
+  </li> 
 </ul>
       </form>
     </div>

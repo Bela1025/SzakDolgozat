@@ -38,7 +38,7 @@
 			$host = "localhost";
 			$db_username = "admin";
 			$db_password = "jF/rfVlPIJHSjGPc";
-			$db_name = "c31vargabeladb";
+			$db_name = "szakdoga";
 			$conn = mysqli_connect($host, $db_username, $db_password, $db_name);
 			header('Location: login.php');
 			
