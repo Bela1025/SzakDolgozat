@@ -4,7 +4,7 @@ session_start();
 
 // Check if user is already logged in, redirect to dashboard if true
 if (isset($_SESSION['user_id'])) {
-    header('Location: index.php');
+    header('Location: dashboard.php');
     exit;
 }
 
@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
         if (password_verify($password, $row['password'])) {
             // Set session variable and redirect to dashboard
             $_SESSION['user_id'] = $row['id'];
-            header('Location: index.php');
+            header('Location: dashboard.php');
             exit;
         }
     }

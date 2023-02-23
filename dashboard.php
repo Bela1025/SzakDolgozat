@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,12 +40,12 @@
       </ul>
       <form class="d-flex" role="search">
       <ul calss="navbar-nav me-0 mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a class="nav-link"  href="registration.php">Regisztráció</a> 
+
+      <li class="nav-item" >
+      <form method="POST" action="">
+        <input type="submit" name="logout" value="Logout">
+    </form>
     </li>
-    <li class="nav-item">
-    <a class="nav-link"  href="login.php">Bejelentkezés</a>   
-  </li>
 </ul>
       </form>
     </div>

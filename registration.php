@@ -38,7 +38,7 @@
 			$host = "localhost";
 			$db_username = "admin";
 			$db_password = "jF/rfVlPIJHSjGPc";
-			$db_name = "szakdoga";
+			$db_name = "c31vargabeladb";
 			$conn = mysqli_connect($host, $db_username, $db_password, $db_name);
 			header('Location: login.php');
 			
@@ -47,7 +47,7 @@
 			}
 			
 			// Prepare the SQL statement to insert the user data into the database
-			$sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email')";
+			$sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$hashed_password', '$email')";
 
 			// Execute the SQL statement
 			if (mysqli_query($conn, $sql)) {
