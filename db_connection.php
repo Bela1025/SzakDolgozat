@@ -1,7 +1,7 @@
 <?php
 // MySQL database connection parameters
-$host = 'admin';
-$username = 'root';
+$host = 'localhost';
+$username = 'admin';
 $password = 'jF/rfVlPIJHSjGPc';
 $database = 'szakdoga';
 

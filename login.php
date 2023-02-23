@@ -42,17 +42,18 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login Page</title>
+    <title>Bejelentkezés</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h2>Login</h2>
+    <h2>Bejelentkezés</h2>
     <?php if (isset($error_message)): ?>
         <p style="color: red;"><?php echo $error_message; ?></p>
     <?php endif; ?>
     <form action="login.php" method="post">
-        <label for="username">Username:</label>
+        <label for="username">Felhasználónév:</label>
         <input type="text" name="username" id="username" required><br><br>
-        <label for="password">Password:</label>
+        <label for="password">Jelszó:</label>
         <input type="password" name="password" id="password" required><br><br>
         <input type="submit" name="submit" value="Login">
     </form>
