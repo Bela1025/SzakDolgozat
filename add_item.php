@@ -1,132 +1,178 @@
 <?php
-// Include the database connection file
-include_once 'db_connection.php';
+// Start a session
+session_start();
 
-// Define variables and initialize with empty values
-$item_name = $item_description = $item_quantity = $item_price = $location_id = "";
-$item_name_err = $item_quantity_err = $item_price_err = "";
+/* Check if the user is logged in, otherwise redirect to login page
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  header('location: login.php');
+  exit;
+}*/
 
-// Processing form data when form is submitted
+require_once "db_connection.php";
+
+
+$location_id = $item_name = $item_description = $item_quantity = $item_price = "";
+$location_id_err = $item_name_err = $item_quantity_err = $item_price_err = "";
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // Validate item name
-    if (empty(trim($_POST["item_name"]))) {
-        $item_name_err = "Kérjük, adja meg a termék nevét.";
+    
+    $input_location_id = trim($_POST["location_id"]);
+    if (empty($input_location_id)) {
+        $location_id_err = "Please select a location.";
     } else {
-        $item_name = trim($_POST["item_name"]);
+        $location_id = $input_location_id;
     }
 
-    // Validate item quantity
-    if (empty(trim($_POST["item_quantity"]))) {
-        $item_quantity_err = "Kérjük, adja meg a termék mennyiségét.";
+   
+    $input_item_name = trim($_POST["item_name"]);
+    if (empty($input_item_name)) {
+        $item_name_err = "Please enter an item name.";
     } else {
-        $item_quantity = trim($_POST["item_quantity"]);
+        $item_name = $input_item_name;
     }
 
-    // Validate item price
-    if (empty(trim($_POST["item_price"]))) {
-        $item_price_err = "Kérjük, adja meg a termék árát.";
+  
+    $input_item_quantity = trim($_POST["item_quantity"]);
+    if (empty($input_item_quantity)) {
+        $item_quantity_err = "Please enter a quantity.";
+    } elseif (!ctype_digit($input_item_quantity)) {
+        $item_quantity_err = "Please enter a valid quantity (positive whole number).";
     } else {
-        $item_price = trim($_POST["item_price"]);
+        $item_quantity = $input_item_quantity;
     }
 
-    // Get location ID
-    $location_id = $_POST["location_id"];
+    
+    $input_item_price = trim($_POST["item_price"]);
+    if (empty($input_item_price)) {
+        $item_price_err = "Please enter a price.";
+    } elseif (!is_numeric($input_item_price) || $input_item_price <= 0) {
+        $item_price_err = "Please enter a valid price (positive number).";
+    } else {
+        $item_price = $input_item_price;
+    }
 
-    // Check input errors before inserting in database
-    if (empty($item_name_err) && empty($item_quantity_err) && empty($item_price_err)) {
+   
+    $item_description = trim($_POST["item_description"]);
 
-        // Prepare an insert statement
-        $sql = "INSERT INTO inventory (location_id, item_name, item_description, item_quantity, item_price) 
-                VALUES (?, ?, ?, ?, ?)";
+   
+    if (empty($location_id_err) && empty($item_name_err) && empty($item_quantity_err) && empty($item_price_err)) {
+        
+        $sql = "INSERT INTO inventory (location_id, item_name, item_description, item_quantity, item_price) VALUES (?, ?, ?, ?, ?)";
 
-        if ($stmt = mysqli_prepare($conn, $sql)) {
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "isssd", $location_id, $item_name, $item_description, $item_quantity, $item_price);
+        if ($stmt = mysqli_prepare($link, $sql)) {
+           
+            mysqli_stmt_bind_param($stmt, "isssd", $param_location_id, $param_item_name, $param_item_description, $param_item_quantity, $param_item_price);
 
-            // Attempt to execute the prepared statement
+          
+            $param_location_id = $location_id;
+            $param_item_name = $item_name;
+            $param_item_description = $item_description;
+            $param_item_quantity = $item_quantity;
+            $param_item_price = $item_price;
+
+           
             if (mysqli_stmt_execute($stmt)) {
-                // Redirect to inventory page
-                header("location: inventory.php");
-                exit();
+               
+                header("location: raktar.php");
+                exit;
             } else {
-                echo "Oops! Valami hiba történt. Kérjük, próbálja újra később.";
+                echo "Oops! Something went wrong. Please try again later.";
             }
 
-            // Close statement
+           
             mysqli_stmt_close($stmt);
         }
     }
 
-    // Close connection
-    mysqli_close($conn);
+    
+    mysqli_close($link);
 }
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Készlet felvétel</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link rel="stylesheet" href="additem.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Készlet felvétele</title>
 </head>
 <body>
- 
-<div class="container my-4">
-    <h1 class="mb-4">Készlet felvétel</h1>
-    <form action="add_item.php" method="POST">
-        <div class="form-group">
-            <label for="location_id">Raktár helye:</label>
-            <select class="form-control" id="location_id" name="location_id">
-                <option value="">Válassz raktárat</option>
-                <?php
-                // Connect to the database
-                $conn = mysqli_connect('localhost', 'username', 'password', 'database_name');
+<nav class="navbar navbar-dark bg-primary" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="dashboard.php">Tihanyi-Tb Kft.</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="dashboard.php">Főoldal</a>
+        </li>
+        <li class="nav-item">
+          
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Lehetőségek
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Elérhetőség</a></li>
+            <li><a class="dropdown-item" href="raktar.php">Raktár</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Megrendelés</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          
+        </li>
+      </ul>
+      <ul class="navbar-nav me-0 mb-2 mb-lg-0"> 
+        <li class="nav-item" >
+          <form method="POST" action="">
+            <input type="submit" name="logout" value="Kijelentkezés">
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-                // Check if the connection was successful
-                if (!$conn) {
-                    die('Could not connect to the database: ' . mysqli_connect_error());
-                }
-
-                // Query the database to get the list of locations
-                $sql = "SELECT * FROM locations";
-                $result = mysqli_query($conn, $sql);
-
-                // Check if there are any locations
-                if (mysqli_num_rows($result) > 0) {
-                    // Loop through each row in the result set and add an option for each location
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<option value="' . $row['location_id'] . '">' . $row['location_name'] . '</option>';
-                    }
-                } else {
-                    echo '<option disabled>Nincs elérhető raktár.</option>';
-                }
-
-                // Close the database connection
-                mysqli_close($conn);
-                ?>
+    <h2>Készlet felvétele</h2>
+    <p>Kérjük, töltse ki az alábbi mezőket az új készlet felvételéhez:</p>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <div>
+            <label for="location_id">Helyszín:</label>
+            <select name="location_id" id="location_id">
+                <option value="">Válasszon helyszínt...</option>
+                <!-- TODO: dinamikusan generált helyszín opciók -->
             </select>
+            <span><?php echo $location_id_err; ?></span>
         </div>
-        <div class="form-group">
+        <div>
             <label for="item_name">Termék neve:</label>
-            <input type="text" class="form-control" id="item_name" name="item_name" required>
+            <input type="text" name="item_name" id="item_name" value="<?php echo $item_name; ?>">
+            <span><?php echo $item_name_err; ?></span>
         </div>
-        <div class="form-group">
+        <div>
             <label for="item_description">Termék leírása:</label>
-            <textarea class="form-control" id="item_description" name="item_description"></textarea>
+            <textarea name="item_description" id="item_description"><?php echo $item_description; ?></textarea>
         </div>
-        <div class="form-group">
+        <div>
             <label for="item_quantity">Mennyiség:</label>
-            <input type="number" class="form-control" id="item_quantity" name="item_quantity" required>
+            <input type="number" name="item_quantity" id="item_quantity" value="<?php echo $item_quantity; ?>">
+            <span><?php echo $item_quantity_err; ?></span>
         </div>
-        <div class="form-group">
+        <div>
             <label for="item_price">Ár:</label>
-            <input type="number" class="form-control" id="item_price" name="item_price" step="0.01" required>
+            <input type="number" step="0.01" name="item_price" id="item_price" value="<?php echo $item_price; ?>">
+            <span><?php echo $item_price_err; ?></span>
         </div>
-        <button type="submit" class="btn btn-primary">Felvitel</button>
+        <div>
+            <input type="submit" value="Felvétel">
+            <a href="raktar.php">Mégse</a>
+        </div>
     </form>
-</div>
-
 </body>
 </html>

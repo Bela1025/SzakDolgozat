@@ -37,7 +37,7 @@
 			
 			$host = "localhost";
 			$db_username = "admin";
-			$db_password = "r]64.dsUgsO!1v2@";
+			$db_password = "pp@Q3f7rAcv1EmFV";
 			$db_name = "szakdoga";
 			$conn = mysqli_connect($host, $db_username, $db_password, $db_name);
 			header('Location: login.php');

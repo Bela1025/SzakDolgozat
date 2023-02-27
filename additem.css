@@ -1,0 +1,86 @@
+/* Alap stílusok */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    margin-bottom: 20px;
+  }
+  
+  form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+  }
+  
+  form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  form input,
+  form select,
+  form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  form input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  form input[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  form a {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 16px;
+    color: #4CAF50;
+  }
+  
+  form a:hover {
+    color: #3e8e41;
+  }
+  
+  /* Hibaüzenetek */
+  span {
+    color: #f00;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+  }
+  

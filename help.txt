@@ -68,4 +68,5 @@ if (isset($_POST['submit'])) {
 ?>
 
 
-jelszó : r]64.dsUgsO!1v2@
+jelszó otthon : r]64.dsUgsO!1v2@
+jelszó suli: pp@Q3f7rAcv1EmFV
