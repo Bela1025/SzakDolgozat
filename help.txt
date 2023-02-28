@@ -70,3 +70,13 @@ if (isset($_POST['submit'])) {
 
 jelszó otthon : r]64.dsUgsO!1v2@
 jelszó suli: pp@Q3f7rAcv1EmFV
+  }
+
+                // Close statement
+                mysqli_stmt_close($stmt);
+            }
+        }
+
+        // Close connection
+        mysqli_close($link);
+    }

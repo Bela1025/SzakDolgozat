@@ -82,6 +82,7 @@ if (isset($_POST['logout'])) {
                         <tr>
                             <th scope="col">Termék neve</th>
                             <th scope="col">Mennyiség</th>
+                            <th scope="col">Termék leírása</th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -89,8 +90,9 @@ if (isset($_POST['logout'])) {
             
             while ($row = mysqli_fetch_assoc($result)) {
                 echo '<tr>
-                        <td>' . $row['product_name'] . '</td>
-                        <td>' . $row['quantity'] . '</td>
+                        <td>' . $row['item_name'] . '</td>
+                        <td>' . $row['item_quantity'] . '</td>
+                        <td>' . $row['item_description'] . '</td>
                      </tr>';
             }
 
