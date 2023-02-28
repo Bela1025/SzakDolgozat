@@ -29,7 +29,7 @@
             Lehetőségek
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Elérhetőség</a></li>
+            <li><a class="dropdown-item" href="contact.html">Elérhetőség</a></li>
             <li><a class="dropdown-item" href="raktar.php">Raktár</a></li>
             <li><a class="dropdown-item" href="add_item.php">Készlet felvétel</a></li>
             <li><hr class="dropdown-divider"></li>
