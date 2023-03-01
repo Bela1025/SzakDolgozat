@@ -30,6 +30,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Elérhetőség</a></li>
             <li><a class="dropdown-item" href="raktar.php">Raktár</a></li>
+            <li><a class="dropdown-item" href="add_item.php">Készlet felvétel</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Megrendelés</a></li>
           </ul>
@@ -118,43 +119,6 @@ if (mysqli_stmt_execute($stmt)) {
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
 ?>
-
-    <h2>Készlet felvétele</h2>
-    <p>Kérjük, töltse ki az alábbi mezőket az új készlet felvételéhez:</p>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div>
-            <label for="location_id">Helyszín:</label>
-            <select name="location_id" id="location_id">
-                <option value="">Válasszon helyszínt...</option>
-                <!-- TODO: dinamikusan generált helyszín opciók -->
-            </select>
-            <span><?php echo $location_id_err; ?></span>
-        </div>
-        <div>
-            <label for="item_name">Termék neve:</label>
-            <input type="text" name="item_name" id="item_name" value="<?php echo $item_name; ?>">
-            <span><?php echo $item_name_err; ?></span>
-        </div>
-        <div>
-            <label for="item_description">Termék leírása:</label>
-            <textarea name="item_description" id="item_description"><?php echo $item_description; ?></textarea>
-        </div>
-        <div>
-            <label for="item_quantity">Mennyiség:</label>
-            <input type="number" name="item_quantity" id="item_quantity" value="<?php echo $item_quantity; ?>">
-            <span><?php echo $item_quantity_err; ?></span>
-        </div>
-        <div>
-            <label for="item_price">Ár:</label>
-            <input type="number" step="0.01" name="item_price" id="item_price" value="<?php echo $item_price; ?>">
-            <span><?php echo $item_price_err; ?></span>
-        </div>
-        <div>
-            <input type="submit" value="Felvétel">
-            <a href="raktar.php">Mégse</a>
-        </div>
-    </form>
-
-	</form>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
 </html>
