@@ -100,6 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<h1>Készlet felvétel</h1>
 <<<<<<< HEAD
 	
@@ -188,6 +189,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </div>
 </nav>
 
+=======
+<nav class="navbar navbar-dark bg-primary" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="dashboard.php">Tihanyi-Tb Kft.</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="dashboard.php">Főoldal</a>
+        </li>
+        <li class="nav-item">
+          
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Lehetőségek
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Elérhetőség</a></li>
+            <li><a class="dropdown-item" href="raktar.php">Raktár</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Megrendelés</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          
+        </li>
+      </ul>
+      <ul class="navbar-nav me-0 mb-2 mb-lg-0"> 
+        <li class="nav-item" >
+          <form method="POST" action="">
+            <input type="submit" name="logout" value="Kijelentkezés">
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+>>>>>>> parent of b170dd3 (Készlet felvétel)
     <h2>Készlet felvétele</h2>
     <p>Kérjük, töltse ki az alábbi mezőket az új készlet felvételéhez:</p>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -223,6 +266,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="raktar.php">Mégse</a>
         </div>
     </form>
+<<<<<<< HEAD
+>>>>>>> parent of b170dd3 (Készlet felvétel)
+=======
 >>>>>>> parent of b170dd3 (Készlet felvétel)
 </body>
 </html>
