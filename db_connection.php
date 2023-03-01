@@ -2,7 +2,7 @@
 // MySQL database connection parameters
 $host = 'localhost';
 $username = 'admin';
-$password = 'r]64.dsUgsO!1v2@';
+$password = 'pp@Q3f7rAcv1EmFV';
 $database = 'szakdoga';
 
 // Create MySQL connection
