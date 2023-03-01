@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
         <input type="text" name="username" id="username" required><br><br>
         <label for="password">Jelszó:</label>
         <input type="password" name="password" id="password" required><br><br>
-        <input type="submit" name="submit" value="Bejelentkezés">
+        <input type="submit" name="submit" value="Login">
     </form>
 </body>
 </html>
