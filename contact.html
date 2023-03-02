@@ -1,87 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="contact.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <meta charset="UTF-8">
 	<title>Elérhetőségek</title>
-	<style>
-		/* Alapértelmezett stílusok */
-		body {
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-		}
-		h1 {
-			font-size: 36px;
-			margin-top: 50px;
-			margin-bottom: 30px;
-			text-align: center;
-		}
-		.container {
-			max-width: 800px;
-			margin: 0 auto;
-			padding: 0 20px;
-		}
-		/* Elérhetőségek táblázat */
-		table {
-			width: 100%;
-			border-collapse: collapse;
-			margin-bottom: 50px;
-		}
-		table th, table td {
-			padding: 10px;
-			border: 1px solid #ddd;
-			text-align: left;
-		}
-		table th {
-			background-color: #f5f5f5;
-			font-weight: normal;
-		}
-		table td:first-child {
-			width: 200px;
-			font-weight: bold;
-		}
-		/* Űrlap */
-		form {
-			margin-bottom: 50px;
-		}
-		label {
-			display: block;
-			margin-bottom: 10px;
-			font-weight: bold;
-		}
-		input[type=text], input[type=email], textarea {
-			display: block;
-			width: 100%;
-			padding: 10px;
-			margin-bottom: 20px;
-			border: 1px solid #ddd;
-			border-radius: 5px;
-			font-size: 16px;
-			font-family: Arial, sans-serif;
-		}
-		input[type=submit] {
-			background-color: #4CAF50;
-			color: #fff;
-			border: none;
-			border-radius: 5px;
-			padding: 10px 20px;
-			font-size: 16px;
-			font-family: Arial, sans-serif;
-			cursor: pointer;
-		}
-		input[type=submit]:hover {
-			background-color: #3e8e41;
-		}
-		/* Üzenet */
-		.message {
-			padding: 20px;
-			background-color: #f5f5f5;
-			border: 1px solid #ddd;
-			border-radius: 5px;
-			margin-bottom: 50px;
-		}
-	</style>
+	
 </head>
 <body>
 	<nav class="navbar navbar-dark bg-primary" style="background-color: #e3f2fd;">
@@ -116,7 +40,7 @@
 			</ul>
 			<ul class="navbar-nav me-0 mb-2 mb-lg-0"> 
 			  <li class="nav-item" >
-				<form method="POST" action="">
+				<form method="POST" action="logout.php">
 				  <input type="submit" name="logout" value="Kijelentkezés">
 				</form>
 			  </li>

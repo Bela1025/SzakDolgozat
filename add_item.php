@@ -50,7 +50,8 @@
   </div>
 </nav>
 	<h1>Készlet felvétel</h1>
-	<form action="add_item.php" method="post">
+	
+  <form action="add_item.php" method="post">
 		<label for="item_name">Termék neve:</label>
 		<input type="text" id="item_name" name="item_name" required><br><br>
 		<label for="item_description">Termék leírása:</label>

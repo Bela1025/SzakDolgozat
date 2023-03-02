@@ -15,16 +15,3 @@ if (isset($_POST['logout'])) {
     header('Location: index.php');
     exit;
 }
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Logout Example</title>
-</head>
-<body>
-    <h2>Welcome, <?php echo $_SESSION['username']; ?></h2>
-    <form method="post" action="">
-        <input type="submit" name="logout" value="Logout">
-    </form>
-</body>
-</html>
