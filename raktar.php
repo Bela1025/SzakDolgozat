@@ -85,32 +85,38 @@ if (isset($_POST['logout'])) {
 
        
         if (mysqli_num_rows($result) > 0) {
-            echo '<table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Termék neve</th>
-                            <th scope="col">Mennyiség</th>
-                            <th scope="col">Termék ára</th>
-                            <th scope="col">Termék leírása</th>
-                        </tr>
-                    </thead>
-                    <tbody>';
-
-            
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo '<tr>
-                        <td>' . $row['item_name'] . '</td>
-                        <td>' . $row['item_quantity'] . '</td>
-                        <td>' . $row['item_price'] . '</td>
-                        <td>' . $row['item_description'] . '</td>
-                     </tr>';
-            }
-
-            echo '</tbody></table>';
+          echo '<table class="table">
+                  <thead>
+                    <tr>
+                    <th scope="col">Termék kódja</th>
+                      <th scope="col">Termék neve</th>
+                      <th scope="col">Mennyiség</th>
+                      <th scope="col">Termék ára</th>
+                      <th scope="col">Termék leírása</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>';
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo '<tr>
+                    <td>' . $row['inventory_id'] . '</td>
+                    <td>' . $row['item_name'] . '</td>
+                    <td>' . $row['item_quantity'] . '</td>
+                    <td>' . $row['item_price'] . '</td>
+                    <td>' . $row['item_description'] . '</td>
+                    
+                    <td>
+                      <form method="POST" action="">
+                        <input type="hidden" name="item_id" value="' . $row['inventory_id'] . '">
+                        <input type="submit" name="add_to_cart" value="Kosárhoz ad" class="btn btn-primary">
+                      </form>
+                    </td>
+                  </tr>';
+          }
+          echo '</tbody></table>';
         } else {
-            echo '<p class="lead">Nincsenek termékek a készleten.</p>';
+          echo '<p class="lead">Nincsenek termékek a készleten.</p>';
         }
-
       
         mysqli_close($conn);
     ?>

@@ -34,7 +34,7 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Megrendelés</a></li>
           </ul>
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Hírdetéseink
         </a>
         <ul class="dropdown-menu">
@@ -67,9 +67,13 @@
 		<input type="number" id="item_quantity" name="item_quantity" min="1" required><br><br>
 		<label for="item_price">Egységár:</label>
 		<input type="number" id="item_price" name="item_price" min="0.01" step="0.01" required><br><br>
-		<label for="location_id">Raktár:</label>
+		<label for="item_image">Kép:</label>
+    <input type="file" id="item_image" name="item_image">
+    <label for="location_id">Raktár:</label>
 		<select id="location_id" name="location_id" required>
-			<option value="" disabled selected>Válassz raktárat</option>
+    <option value="" disabled selected>Válassz raktárat</option>
+    
+			
 
       <?php
 			// Load database configuration and connect to database
@@ -88,9 +92,6 @@
 					echo "<option value=\"{$row['location_id']}\">{$row['location_name']}</option>";
 				}
 			}
-
-
-
       ?>
       </select><br><br>
 		<input type="submit" value="Készlet felvétele">
@@ -102,12 +103,10 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Prepare SQL statement to insert new item into the database
-$sql = "INSERT INTO inventory (item_name, item_description, item_quantity, item_price, location_id) VALUES (?, ?, ?, ?, ?)";
-$stmt = mysqli_prepare($conn, $sql);
 
-// Bind parameters to the SQL statement
-mysqli_stmt_bind_param($stmt, "ssidi", $item_name, $item_description, $item_quantity, $item_price, $location_id);
+$stmt = mysqli_prepare($conn, "INSERT INTO inventory (item_name, item_description, item_quantity, item_price, location_id, item_image) VALUES (?, ?, ?, ?, ?, ?)");
+
+
 
 // Get values submitted by the form
 $item_name = $_POST['item_name'];
@@ -116,17 +115,51 @@ $item_quantity = $_POST['item_quantity'];
 $item_price = $_POST['item_price'];
 $location_id = $_POST['location_id'];
 
-// Execute the SQL statement
-if (mysqli_stmt_execute($stmt)) {
-    echo "A termék sikeresen felvéve a készletbe.";
+// Check if a file was uploaded
+if (isset($_FILES['item_image']) && $_FILES['item_image']['error'] == 0) {
+  // Get file data
+  $file_name = $_FILES['item_image']['name'];
+  $file_size = $_FILES['item_image']['size'];
+  $file_tmp = $_FILES['item_image']['tmp_name'];
+  $file_type = $_FILES['item_image']['type'];
+
+  // Move uploaded file to a permanent location
+  $target_dir = "C:\xampp\htdocs\SzakDolgozat\images\\";
+  $target_file = $target_dir . basename($file_name);
+  move_uploaded_file($file_tmp, $target_file);
+
+  // Save file path to database
+  $image_path = $target_file;
 } else {
-    echo "Hiba történt a termék felvétele közben: " . mysqli_error($conn);
+  // No file was uploaded
+  $image_path = "";
+}
+
+// Load database configuration and connect to database
+require_once 'db_connection.php';
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$stmt = mysqli_prepare($conn, "INSERT INTO inventory (item_name, item_description, item_quantity, item_price, location_id, item_image) VALUES (?, ?, ?, ?, ?, ?)");
+
+// Bind parameters to the SQL statement
+mysqli_stmt_bind_param($stmt, "ssidis", $item_name, $item_description, $item_quantity, $item_price, $location_id, $image_path);
+
+if (mysqli_stmt_execute($stmt)) {
+  echo "A termék sikeresen felvéve a készletbe.";
+} else {
+  echo "Hiba történt a termék felvétele közben: " . mysqli_error($conn);
 }
 
 // Close the prepared statement and database connection
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
+
+
 ?>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>
 </html>
