@@ -108,14 +108,15 @@ if (isset($_POST['submit'])) {
     return $data;
   }
   $error_msg = "A kosár üres!";
-  $name = test_input($_POST['name']);
-    $email = test_input($_POST['email']);
-    $phone = test_input($_POST['phone']);
+  $name = test_input($_POST['customer_name']);
+    $email = test_input($_POST['customer_email']);
+    $phone = test_input($_POST['customer_phone']);
   // Az űrlap megjelenítése
   ?>
   <!DOCTYPE html>
   <html>
   <head>
+    <link rel="stylesheet" href="order.css">
     <title>Megrendelés</title>
   </head>
   <body>
@@ -124,14 +125,20 @@ if (isset($_POST['submit'])) {
       <div style="color: red;"><?php echo $error_msg; ?></div>
     <?php } ?>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-      <label for="name">Név:</label><br>
-      <input type="text" id="name" name="name" value="<?php echo $name; ?>"><br>
-      <label for="email">E-mail cím:</label><br>
-      <input type="email" id="email" name="email" value="<?php echo $email; ?>"><br>
-      <label for="phone">Telefonszám:</label><br>
-      <input type="tel" id="phone" name="phone" value="<?php echo $phone; ?>"><br><br>
-      <input type="submit" name="submit" value="Megrendelés leadása">
-    </form>
+  <label for="name">Név:</label><br>
+  <input type="text" id="name" name="name"><br>
+
+  <label for="email">E-mail cím:</label><br>
+  <input type="text" id="email" name="email"><br>
+
+  <label for="phone">Telefonszám:</label><br>
+  <input type="text" id="phone" name="phone"><br>
+
+  <label for="message">Üzenet:</label><br>
+  <textarea id="message" name="message"></textarea><br>
+
+  <input type="submit" value="Küldés">
+</form>
   </body>
   </html>
   
