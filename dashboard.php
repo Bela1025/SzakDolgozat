@@ -34,7 +34,14 @@
             <li><a class="dropdown-item" href="add_item.php">Készlet felvétel</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Megrendelés</a></li>
-          </ul>
+          </ul>  
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Hírdetéseink
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="https://www.jofogas.hu/magyarorszag?account_list_id=92ab10f73289a2a0263eaa836ff8ff6f">Jófogás</li>
+          <li><a class="dropdown-item" href="https://www.ebay.com/str/tihanyitbstore">Ebay</a></li>  
+        </ul>
         </li>
         <li class="nav-item">
           

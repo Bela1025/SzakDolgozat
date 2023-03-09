@@ -33,6 +33,13 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Megrendelés</a></li>
           </ul>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Hírdetéseink
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="https://www.jofogas.hu/magyarorszag?account_list_id=92ab10f73289a2a0263eaa836ff8ff6f">Jófogás</li>
+          <li><a class="dropdown-item" href="https://www.ebay.com/str/tihanyitbstore">Ebay</a></li>  
+        </ul>
         </li>
         <li class="nav-item">
           
@@ -40,7 +47,7 @@
       </ul>
       <ul class="navbar-nav me-0 mb-2 mb-lg-0"> 
         <li class="nav-item" >
-          <form method="POST" action="logout.php">
+          <form method="POST" action="">
             <input type="submit" name="logout" value="Kijelentkezés">
           </form>
         </li>
@@ -83,6 +90,8 @@ if (isset($_POST['logout'])) {
                         <tr>
                             <th scope="col">Termék neve</th>
                             <th scope="col">Mennyiség</th>
+                            <th scope="col">Termék ára</th>
+                            <th scope="col">Termék leírása</th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -92,6 +101,8 @@ if (isset($_POST['logout'])) {
                 echo '<tr>
                         <td>' . $row['item_name'] . '</td>
                         <td>' . $row['item_quantity'] . '</td>
+                        <td>' . $row['item_price'] . '</td>
+                        <td>' . $row['item_description'] . '</td>
                      </tr>';
             }
 
