@@ -31,7 +31,7 @@
             <li><a class="dropdown-item" href="raktar.php">Raktár</a></li>
             <li><a class="dropdown-item" href="add_item.php">Készlet felvétel</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Megrendelés</a></li>
+            <li><a class="dropdown-item" href="order.php">Megrendelés</a></li>
           </ul>
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Hírdetéseink
