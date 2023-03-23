@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raktárkezelő rendszer - Készlet</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        body{
+          background-color: #95D1CC;
+        }
+      </style>
 </head>
 <body>
 <nav class="navbar navbar-dark bg-primary" style="background-color: #e3f2fd;">
@@ -76,51 +81,55 @@ if (isset($_POST['logout'])) {
 }
 ?>
 
-<div class="container my-5">
-    <h1>Készlet</h1>
-    <?php
-       
-        $sql = "SELECT * FROM inventory ";
-        $result = mysqli_query($conn, $sql);
 
-       
-        if (mysqli_num_rows($result) > 0) {
-          echo '<table class="table">
-                  <thead>
-                    <tr>
-                    <th scope="col">Termék kódja</th>
-                      <th scope="col">Termék neve</th>
-                      <th scope="col">Mennyiség</th>
-                      <th scope="col">Termék ára</th>
-                      <th scope="col">Termék leírása</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>';
-          while ($row = mysqli_fetch_assoc($result)) {
-            echo '<tr>
-                    <td>' . $row['inventory_id'] . '</td>
-                    <td>' . $row['item_name'] . '</td>
-                    <td>' . $row['item_quantity'] . '</td>
-                    <td>' . $row['item_price'] . '</td>
-                    <td>' . $row['item_description'] . '</td>
-                    
-                    <td>
-                      <form method="POST" action="">
-                        <input type="hidden" name="item_id" value="' . $row['inventory_id'] . '">
-                        <input type="submit" name="add_to_cart" value="Kosárhoz ad" class="btn btn-primary">
-                      </form>
-                    </td>
-                  </tr>';
-          }
-          echo '</tbody></table>';
-        } else {
-          echo '<p class="lead">Nincsenek termékek a készleten.</p>';
-        }
-      
-        mysqli_close($conn);
-    ?>
-</div>
+<div class="container my-5">
+        <h1>Készlet</h1>
+        <?php
+
+            $sql = "SELECT * FROM inventory ";
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+              echo '<table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Termék kódja</th>
+                          <th scope="col">Termék neve</th>
+                          <th scope="col">Mennyiség</th>
+                          <th scope="col">Termék ára</th>
+                          <th scope="col">Termék leírása</th>
+                          <th scope="col">Kép</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>';
+              while ($row = mysqli_fetch_assoc($result)) {
+                $imageSrc = $row['item_image'];
+                echo '<tr>
+                        <td>' . $row['inventory_id'] . '</td>
+                        <td>' . $row['item_name'] . '</td>
+                        <td>' . $row['item_quantity'] . '</td>
+                        <td>' . $row['item_price'] . '</td>
+                        <td>' . $row['item_description'] . '</td>
+                        <td><img src="' . $imageSrc . '" alt="' . $row['item_name'] . '" style="width: 100px; height: auto;"></td>
+                        <td>
+                          <form method="POST" action="">
+                            <input type="hidden" name="item_id" value="' . $row['inventory_id'] . '">
+                            <input type="submit" name="add_to_cart" value="Kosárhoz ad" class="btn btn-primary">
+                          </form>
+                        </td>
+                      </tr>';
+              }
+              echo '</tbody></table>';
+            } else {
+              echo '<p class="lead">Nincsenek termékek a készleten.</p>';
+            }
+
+            mysqli_close($conn);
+        ?>
+    </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

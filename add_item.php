@@ -7,6 +7,7 @@
     <title>Készlet felvétele</title>
 <link rel="stylesheet" type="text/css" href="additem.css">
 	<title>Készlet felvétel</title>
+  
 </head>
 <body>
 <nav class="navbar navbar-dark bg-primary" style="background-color: #e3f2fd;">
@@ -58,7 +59,7 @@
 </nav>
 	<h1>Készlet felvétel</h1>
 	
-  <form action="add_item.php" method="post">
+  <form action="add_item.php" method="post" enctype="multipart/form-data">
 		<label for="item_name">Termék neve:</label>
 		<input type="text" id="item_name" name="item_name" required><br><br>
 		<label for="item_description">Termék leírása:</label>
@@ -124,7 +125,7 @@ if (isset($_FILES['item_image']) && $_FILES['item_image']['error'] == 0) {
   $file_type = $_FILES['item_image']['type'];
 
   // Move uploaded file to a permanent location
-  $target_dir = "C:\xampp\htdocs\SzakDolgozat\images\\";
+  $target_dir = "uploads/";
   $target_file = $target_dir . basename($file_name);
   move_uploaded_file($file_tmp, $target_file);
 
@@ -134,6 +135,7 @@ if (isset($_FILES['item_image']) && $_FILES['item_image']['error'] == 0) {
   // No file was uploaded
   $image_path = "";
 }
+
 
 // Load database configuration and connect to database
 require_once 'db_connection.php';

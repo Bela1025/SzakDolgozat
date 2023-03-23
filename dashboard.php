@@ -2,11 +2,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="bemutat.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <title>Tihanyi-Tb Kft.</title>
+    <style>
+        body{
+          background-color: #FAFFAF;
+        }
+      </style>
 </head>
 <body>
 <!-- Remove the outer <form> tag -->
@@ -77,7 +83,17 @@ if (isset($_POST['logout'])) {
   exit;
 }
 ?>
-
+  <header id="header">
+    <h1>Rólunk</h1>
+  </header>
+  <div id="content">
+    <p>Üdvözöljük a cégünk bemutatkozó szövegében! Cégünk a használt gép alakatrésszel foglalkozik, és számos éves tapasztalattal rendelkezünk ezen a területen. Az alakatrészek széles választékát kínáljuk ügyfeleinknek, amelyek tökéletesen megfelelnek az ipari, mezőgazdasági és építőipari szektorok számára.</p>
+    <p>Célunk az, hogy ügyfeleinknek minőségi és megbízható termékeket kínáljunk, és hogy ügyfélszolgálatunk kiváló színvonalon működjön. Minden egyes termékünket alaposan teszteljük, hogy biztosak lehessünk abban, hogy az ügyfelek megkapják a legjobb minőséget és teljesítményt. Ezen felül, szakértői csapatunk mindig rendelkezésre áll, hogy válaszoljon minden kérdésre, és segítsen az ügyfeleknek megtalálni a számukra legmegfelelőbb terméket.</p>
+  </div>
+  <div class="col-xs-12 col-lg-7">
+      		<iframe width="300" height="300" style="position: fixed; bottom: 0; left: 0; " frameborder="0" scrolling="no" marginheight="1" marginwidth="1" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2757300.9783323514!2d18.3842!3d47.55462!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476a409f23d15633%3A0x25138d667e034655!2zUmlnw7NtYWpvciwgVGF0YWLDoW55YSwgMjgwMCBNYWd5YXJvcnN6w6Fn!5e0!3m2!1shu!2s!4v1427878457047" height="450" frameborder="0" style="border-style: none; border-color: inherit;width:100%;" name="I1" id="I1" class="style15"></iframe>
+    </div>
+    <img src="logo.PNG">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
