@@ -60,9 +60,9 @@ $sql = "SELECT inventory.*, locations.location_name FROM inventory LEFT JOIN loc
 $result = mysqli_query($conn, $sql);
 if (isset($_POST['submit'])) {
     // Adatok ellenőrzése és mentése
-    $name = test_input($_POST['name']);
-    $email = test_input($_POST['email']);
-    $phone = test_input($_POST['phone']);
+    $name = test_input($_POST['customer_name']);
+    $email = test_input($_POST['customer_email']);
+    $phone = test_input($_POST['customer_phone']);
     $error_msg = "A kosár üres!";
     // Ellenőrizzük, hogy a kosár nem üres
     if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
