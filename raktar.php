@@ -109,15 +109,16 @@ if (isset($_POST['logout'])) {
                         <td>' . $row['inventory_id'] . '</td>
                         <td>' . $row['item_name'] . '</td>
                         <td>' . $row['item_quantity'] . '</td>
-                        <td>' . $row['item_price'] . '</td>
+                        <td>' . $row['item_price'] . 'Ft</td>
                         <td>' . $row['item_description'] . '</td>
                         <td><img src="' . $imageSrc . '" alt="' . $row['item_name'] . '" style="width: 100px; height: auto;"></td>
                         <td>
-                          <form method="POST" action="">
+                        <td>
+                        <form method="POST" action="delete_item.php">
                             <input type="hidden" name="item_id" value="' . $row['inventory_id'] . '">
-                            <input type="submit" name="add_to_cart" value="Kosárhoz ad" class="btn btn-primary">
-                          </form>
-                        </td>
+                            <button type="submit" class="btn btn-danger" name="delete_item">Törlés</button>
+                        </form>
+                    </td>
                       </tr>';
               }
               echo '</tbody></table>';
